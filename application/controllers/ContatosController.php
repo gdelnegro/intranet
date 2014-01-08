@@ -16,6 +16,10 @@ class ContatosController extends Zend_Controller_Action
         
         $this->view->dadosContatos = $dadosContatos;
     }
+    
+    public function new(){
+        
+    }
 
 
 }
