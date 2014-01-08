@@ -17,25 +17,28 @@ function custom_echo($x)
   <input type="text" class="input-medium search-query" value='A ser implementado'>
   <button type="submit" class="btn">Pesquisar</button>
 </form>
-<p class="text-right"> <a class="btn btn-primary" href="<?=$this->url(array("controller"=>"grupo","action"=>"new"),null,true)?>">Cadastrar Grupo</a></p>
+<p class="text-right"> <a class="btn btn-primary" href="<?=$this->url(array("controller"=>"mensagens","action"=>"new"),null,true)?>">Cadastrar Contato</a></p>
 <table class="table table-striped table-hover table-bordered table-condensed" width="100%" cellpadding="3" cellspacing="0" border="1">
    <tr>
-        <th><center>Codigo Grupo</center></th>
-        <th><center>Descricao</center></th>                
-        <th><center>Mensagem</center></th>
+        <th><center>Remetente</center></th>
+        <th><center>Mensagem</center></th>                
+        <th><center>Status</center></th>
         <th><center>Alterado por</center></th>
+        <th><center>Data de recebimento</center></th>
         <th><center>Data de Alteraçao</center></th>
         <th><center>Açoes</center></th>
    </tr>
-   <?php foreach($this->dadosMensagens AS $key => $grupo):?>
+   <?php foreach($this->dadosMensagens AS $key => $mensagem):?>
    <tr>
-      <td><center><?=$grupo['idContato']?></center></td>
-<td><center><?=  custom_echo($grupo['mensagem'])?></center></td>        
-        <td><center>Alterado por</center></td>
-        <td><center><?=$grupo['dataContato']?></center></td>
+      <td><center><?=$mensagem['idContato']?></center></td>
+<td><center><?=  custom_echo($mensagem['mensagem'])?></center></td>        
+        <td><center>Status</center></td>
+        <td><center>USR que alterou</center></td>
+        <td><center><?=$mensagem['dataContato']?></center></td>
+        <td><center><?=$mensagem['dataUpdt']?></center></td>
       <td><center>
-         <a href="<?=$this->url(array("controller"=>"grupo","action"=>"show","id"=>"{$grupo['id_grupo']}"),null,true)?>" title="Visualizar Cadastro"><i class='icon-eye-open'> </i></a>
-         <a href="<?=$this->url(array("controller"=>"grupo","action"=>"edit","id"=>"{$grupo['id_grupo']}"),null,true)?>" title="Editar Cadastro"><i class='icon-pencil'></i></a> 
+         <a href="<?=$this->url(array("controller"=>"mensagens","action"=>"show","id"=>"{$mensagem['idContato']}"),null,true)?>" title="Visualizar Contato"><i class='icon-eye-open'> </i></a>
+         <a href="<?=$this->url(array("controller"=>"mensagen","action"=>"edit","id"=>"{$mensagem['idContato']}"),null,true)?>" title="Editar Contato"><i class='icon-pencil'></i></a> 
          </center>
       </td>
    </tr>
