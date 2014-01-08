@@ -27,7 +27,7 @@ function custom_echo($x)
         <th><center>Data de Alteraçao</center></th>
         <th><center>Açoes</center></th>
    </tr>
-   <?php foreach($this->dadosContatos AS $key => $grupo):?>
+   <?php foreach($this->dadosMensagens AS $key => $grupo):?>
    <tr>
       <td><center><?=$grupo['idContato']?></center></td>
 <td><center><?=  custom_echo($grupo['mensagem'])?></center></td>        
