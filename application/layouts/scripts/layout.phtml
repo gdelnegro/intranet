@@ -18,8 +18,17 @@ border-radius:15px;
 <!-- HEADER -->
 
 <div class="page-header">
-    <h1><img src = "<?=$this->baseUrl().'/media/img/ipconverge_logo.jpg'?>" width='20%' height='20%' alt = "BestWebFast" />
+    <h1><img src = "<?=$this->baseUrl().'/media/img/logo.png'?>" width='5%' height='5%' alt = "BestWebFast" />
         <small>Controle Mensagens</small></h1>
+    
+    <div id="area_login">
+                <table>
+                    <tr>
+                        <td>Ola <b><?=$this->layout()->usuario->nome; ?> <i class="icon-user"></i> </b></td>
+                        <td><a href="<?=$this->url(array("controller"=>"index","action"=>"logout"),null,true)?>">Logout</a></td>
+                    </tr>
+                </table>
+            </div>
 </div>
 <!-- HEADER -->
 
