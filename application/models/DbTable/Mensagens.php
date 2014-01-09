@@ -65,6 +65,9 @@ class Application_Model_DbTable_Mensagens extends Zend_Db_Table_Abstract
              ->from('exibeMensagens');
         if( !is_null($id) ){
             $select->where('idContato = ?', $id);
+            $results = $select->query()->fetchAll();
+        
+            return $results[0];
         }
              
         $results = $select->query()->fetchAll();
