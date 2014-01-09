@@ -14,7 +14,7 @@ class MensagensController extends Zend_Controller_Action
     {
         
         $bdMensagens = new Application_Model_DbTable_Mensagens();
-        $dadosMensagens = $bdMensagens->listaMensagens();
+        $dadosMensagens = $bdMensagens->listaMensagens(null, null);
         
         $this->view->dadosMensagens = $dadosMensagens;
     }
@@ -33,7 +33,7 @@ class MensagensController extends Zend_Controller_Action
         $dadosMensagens = $bdMensagens->listaMensagens( $this->_getParam('id') );
         
         $formMensagem->populate($dadosMensagens);
-        $this->view->teste = $dadosMensagens;
+        
         $this->view->formMensagem = $formMensagem;
     }
     
@@ -46,19 +46,25 @@ class MensagensController extends Zend_Controller_Action
     }
    
    public function editAction(){
-       $formGrupo = new Application_Form_Grupo('edit');
-       $grupo = new Application_Model_DbTable_Grupo();
-       $dadosGrupo = $grupo->pesquisarGrupo($this->_getParam(('id')));
-       $formGrupo->populate($dadosGrupo);
-       $this->view->formGrupo = $formGrupo;
+              
+       $formMensagem = new Application_Form_Mensagens('edit');
+       $bdMensagens = new Application_Model_DbTable_Mensagens();
+        
+       $dadosMensagens = $bdMensagens->listaMensagens( $this->_getParam('id') );
+        
+       $formMensagem->populate($dadosMensagens);
+        
+       $this->view->formMensagem = $formMensagem;
    }
    
    public function updateAction()
    {
-      $grupo = new Application_Model_DbTable_Grupo();
-      $grupo->alterarGrupo($this->getAllParams());
-      
-      $this->_redirect('grupo/index');
+       $usuario = Zend_Auth::getInstance()->getIdentity();
+       
+       $dbMensagens = new Application_Model_DbTable_Mensagens();
+       
+       $dbMensagens->alterarMensagem($this->_getAllParams(), $usuario->idUsr);
+       $this->_redirect('mensagens/index');
    }
 
 }

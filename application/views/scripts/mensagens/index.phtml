@@ -31,13 +31,13 @@ function custom_echo($x)
    <tr>
       <td><center><?=$mensagem['nomeCliente']?></center></td>
 <td><center><?=  custom_echo($mensagem['mensagem'])?></center></td>        
-        <td><center><?=$mensagem['Status']?></center></td>
+        <td><center><?=$mensagem['status']?></center></td>
         <td><center><?=$mensagem['nomeUsuario']?></center></td>
         <td><center><?=$mensagem['dataContato']?></center></td>
         <td><center><?=$mensagem['dataUpdt']?></center></td>
       <td><center>
          <a href="<?=$this->url(array("controller"=>"mensagens","action"=>"show","id"=>"{$mensagem['idContato']}"),null,true)?>" title="Visualizar Contato"><i class='icon-eye-open'> </i></a>
-         <a href="<?=$this->url(array("controller"=>"mensagen","action"=>"edit","id"=>"{$mensagem['idContato']}"),null,true)?>" title="Editar Contato"><i class='icon-pencil'></i></a> 
+         <a href="<?=$this->url(array("controller"=>"mensagens","action"=>"edit","id"=>"{$mensagem['idContato']}"),null,true)?>" title="Editar Contato"><i class='icon-pencil'></i></a> 
          </center>
       </td>
    </tr>

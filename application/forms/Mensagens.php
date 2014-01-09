@@ -28,9 +28,9 @@ class Application_Form_Mensagens extends Zend_Form
                 
         /*Elementos*/
         $idContato = new Zend_Form_Element_Hidden('idContato');
-        $idUsr = new Zend_Form_Element_Hidden('idUsr');
+        $idCliente = new Zend_Form_Element_Hidden('idCliente');
 
-        $mensagem = new Zend_Form_Element_Text('mensagem');
+        $mensagem = new Zend_Form_Element_Textarea('mensagem');
         $mensagem->setLabel('Mensagem')
                 ->setAttrib('lenght', 30)
                 ->setRequired(true)
@@ -42,6 +42,7 @@ class Application_Form_Mensagens extends Zend_Form
                                 )
                         )),
                     ))
+                ->setAttrib('rows','10')
                 ->setAttrib('disabled', $this->exibir);
         
         /*
@@ -65,16 +66,20 @@ class Application_Form_Mensagens extends Zend_Form
         
         
         
-        $dt_inclusao = new Zend_Form_Element_Text('dt_inclusao');
-        $dt_inclusao->setLabel('Data de Inclusão')
+        $dt_inclusao = new Zend_Form_Element_Text('dataContato');
+        $dt_inclusao->setLabel('Data de Contato')
                 ->setAttrib('disabled', $this->exibir);
         
-        $dt_alteracao = new Zend_Form_Element_Text('dt_alteracao');
+        $dt_alteracao = new Zend_Form_Element_Text('dataUpdt');
         $dt_alteracao->setLabel('Data de Alteração')
                 ->setAttrib('disabled', $this->exibir);
         
+        $cliente = new Zend_Form_Element_Text('nomeCliente');
+        $cliente->setLabel('Enviada por:')
+                ->setAttrib('disabled', $this->exibir);
+        
 
-        $usuario = new Zend_Form_Element_Text('usuario');
+        $usuario = new Zend_Form_Element_Text('nomeUsuario');
         $usuario->setLabel('Usuário que alterou')
                 ->setAttrib('disabled', $this->exibir);
         
@@ -87,7 +92,7 @@ class Application_Form_Mensagens extends Zend_Form
         
         $this->addElements(array(
             $idContato,
-            $idUsr,
+            $idCliente,
             $mensagem,
             $status,
         ));
@@ -97,19 +102,25 @@ class Application_Form_Mensagens extends Zend_Form
                 $dt_inclusao,
                 $dt_alteracao,
                 $usuario,
+                $cliente
             ));
         }
         
         if ($this->tipo != 'SHOW'){
-            $this->addElement($submit);
+            $this->addElements(array(
+                $submit,
+                    ));
+            
         }
         
         /*Botão Voltar*/
         $this->addElement("button", "voltar", array(
 			"class" => "btn-primary",
 			"label" => "Voltar",
-                        "onclick" => 'window.location =\''.$this->getView()->url(array('controller'=>'grupo','action'=>'index')).'\' '
+                        "onclick" => 'window.location =\''.$this->getView()->url(array('controller'=>'mensagens','action'=>'index')).'\' '
+                        
 		));
+                
         
         /*Botão Imprimir*/
         $this->addElement("button", "imprimir", array(
@@ -120,7 +131,6 @@ class Application_Form_Mensagens extends Zend_Form
 		));
         
     }
-
 
 }
 

@@ -33,7 +33,7 @@ class Application_Model_DbTable_Mensagens extends Zend_Db_Table_Abstract
             'mensagem'          =>  $request['mensagem'],
             'status'            =>  $request['status'],
             'idCliente'         =>  $request['idCliente'],
-            'idUsur'            =>  $usr
+            'idUsr'            =>  $usr
         );
         return $this->insert($dados);
     }
@@ -51,24 +51,29 @@ class Application_Model_DbTable_Mensagens extends Zend_Db_Table_Abstract
             'mensagem'          =>  $request['mensagem'],
             'status'            =>  $request['status'],
             'idCliente'         =>  $request['idCliente'],
-            'idUsur'            =>  $usr
+            'idUsr'            =>  $usr
         );
         $where = $this->getAdapter()->quoteInto("idContato = ?", $request['idContato']);
         $this->update($dados, $where);
     }
     
     
-    public function listaMensagens($id = null){
+    public function listaMensagens($id = null,$todas = NULL){
         $db = Zend_Db_Table::getDefaultAdapter();
         
         $select = $db->select()
              ->from('exibeMensagens');
+        
         if( !is_null($id) ){
             $select->where('idContato = ?', $id);
             $results = $select->query()->fetchAll();
         
             return $results[0];
         }
+        if( is_null($todas)){
+            $select->where('status != ?', 'Fechado');
+        }
+        $select->order('dataContato DESC');
              
         $results = $select->query()->fetchAll();
         
