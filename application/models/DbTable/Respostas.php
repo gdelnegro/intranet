@@ -85,18 +85,19 @@ class Application_Model_DbTable_Respostas extends Zend_Db_Table_Abstract
     public function contRespostas($idContato = NULL ,$idUsr = NULL){
         $db = Zend_Db_Table::getDefaultAdapter();
         $select = $db->select()
-                ->from($this, array('count(*) as total'));
+                ->from('respostas', array('count(*) as total'));
         
-        if ( !is_null($idContato) ){
+        if ( !is_null($idContato) and is_null($idUsr)){
             $select->where('idContato = ?', $idContato);
             
-        }elseif ( !is_null($idUsr)) {
+        }elseif ( !is_null($idUsr) and is_null($idContato)) {
             $select->where('idUsr = ?', $idContato);
         }
         
         $results = $select->query()->fetchAll();
         
-        return $results[0]->total;
+        return $results[0]['total'];
+
     }
 
 

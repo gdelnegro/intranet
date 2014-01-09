@@ -8,6 +8,11 @@ class MensagensController extends Zend_Controller_Action
         $usuario = Zend_Auth::getInstance()->getIdentity();
         //$this->view->usuario = $usuario;
         Zend_Layout::getMvcInstance()->assign('usuario', $usuario);
+
+        if ( !Zend_Auth::getInstance()->hasIdentity() ) {
+                return $this->_helper->redirector->goToRoute( array('controller' => 'index'), null, true);
+            //$this->_redirect('/');
+        }
     }
 
     public function indexAction()
