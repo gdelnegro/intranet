@@ -49,6 +49,11 @@ class ResponderController extends Zend_Controller_Action
         
         $this->view->formResposta = $formResposta;
     }
+    
+    public function responderAction() {
+        $resposta = new Application_Model_DbTable_Respostas();
+        $resposta->incluirResposta($this->getAllParams());
+    }
 
 
 }

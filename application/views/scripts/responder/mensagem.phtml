@@ -51,7 +51,8 @@
 <body>
     
                     <?php
-                        echo $this->formResposta;
+                    $this->formResposta->setAction( $this->url( array("controller"=>"responder","action"=>"responder"),null,true ) );    
+                    echo $this->formResposta;
                     ?>
 
         

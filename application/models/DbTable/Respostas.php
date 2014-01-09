@@ -28,10 +28,10 @@ class Application_Model_DbTable_Respostas extends Zend_Db_Table_Abstract
              * 'nome_campo => valor,
              */
             'dataResposta'     =>   $request['dataResposta'],
-            'mensagem'          =>  $request['mensagem'],
+            'mensagem'          =>  $request['resposta'],
             'idCliente'         =>  $request['idCliente'],
             'idContato'         =>  $request['idContato'],
-            'idUsr'            =>  $usr
+            'idUsr'            =>  $request['idUsr']
         );
         return $this->insert($dados);
     }
