@@ -33,7 +33,7 @@ class Application_Form_Mensagens extends Twitter_Form
 
         $mensagem = new Zend_Form_Element_Textarea('mensagem');
         $mensagem->setLabel('Mensagem')
-                ->setAttrib('lenght', 30)
+                ->setAttrib('rows', 10)
                 ->setRequired(true)
                 ->setFilters(array('StringTrim'))
                 ->setValidators(array(
@@ -44,15 +44,7 @@ class Application_Form_Mensagens extends Twitter_Form
                         )),
                     ))
                 ->setAttrib('rows','10')
-                ->setAttrib('disabled', $this->exibir)
-                ->setDecorators(array(
-                            'ViewHelper', 'Errors', 'Description',
-                            array(array('inner' => 'HtmlTag'),
-                                array('tag' => 'div', 'class' => 'span4')),
-                            'Label',
-                            array(array('outter' => 'HtmlTag'),
-                                array('tag' => 'div', 'class' => 'span4'))
-                        ));
+                ->setAttrib('disabled', $this->exibir);
         
         /*
          *Seleciona os valores do status de acordo com a tabela status 

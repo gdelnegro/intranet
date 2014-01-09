@@ -1,5 +1,37 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Responder</b> and script/action name <b>index</b></p>
-</div>
-<?php echo $this->contagem?>
+<?= $this->escape($this->messages[0]) ?> 
+
+<?php var_dump($this->dadosResposta);?>
+<?php
+function custom_echo($x)
+{
+  if(strlen($x)<=50)
+  {
+    echo $x;
+  }
+  else
+  {
+    $y=substr($x,0,50) . '...';
+    echo $y;
+  }
+}?>
+<form class="form-search">
+  <input type="text" class="input-medium search-query" value='A ser implementado'>
+  <button type="submit" class="btn">Pesquisar</button>
+</form>
+<table class="table table-striped table-hover table-bordered table-condensed" width="100%" cellpadding="3" cellspacing="0" border="1">
+   <tr>
+        <th><center>Mensagem</center></th>                
+        <th><center>Data de Envio</center></th>
+        <th><center>Açoes</center></th>
+   </tr>
+   <?php foreach($this->dadosResposta AS $key => $resposta):?>
+   <tr>
+<td><center><?=  custom_echo($resposta['mensagem'])?></center></td>        
+        <td><center><?=$resposta['dataResposta']?></center></td>
+      <td><center>
+         <a href="<?=$this->url(array("controller"=>"responder","action"=>"show","id"=>"{$resposta['idResposta']}"),null,true)?>" title="Visualizar Resposta"><i class='icon-eye-open'> </i></a>
+         </center>
+      </td>
+   </tr>
+   <?php endforeach;?>
+</table>

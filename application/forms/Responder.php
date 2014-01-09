@@ -42,9 +42,9 @@ class Application_Form_Responder extends Twitter_Form
         $idUsr = new Zend_Form_Element_Hidden('idUsr');
         
 
-        $mensagem = new Zend_Form_Element_Textarea('mensagem');
+        $mensagem = new Zend_Form_Element_Textarea('resposta');
         $mensagem->setLabel('Mensagem')
-                ->setAttrib('lenght', 30)
+                ->setAttrib('rows', 10)
                 ->setRequired(true)
                 ->setFilters(array('StringTrim'))
                 ->setValidators(array(
@@ -55,23 +55,11 @@ class Application_Form_Responder extends Twitter_Form
                         )),
                     ))
                 ->setAttrib('rows','10')
-                ->setAttrib('disabled', $this->exibir)
-                ->setDecorators(array(
-                            'ViewHelper', 'Errors', 'Description',
-                            array(array('inner' => 'HtmlTag'),
-                                array('tag' => 'div', 'class' => 'span4')),
-                            'Label',
-                            array(array('outter' => 'HtmlTag'),
-                                array('tag' => 'div', 'class' => 'span4'))
-                        ));
-        
-        $dt_inclusao = new Zend_Form_Element_Text('dataContato');
-        $dt_inclusao->setLabel('Data de Contato')
                 ->setAttrib('disabled', $this->exibir);
         
-        $dt_alteracao = new Zend_Form_Element_Text('dataUpdt');
-        $dt_alteracao->setLabel('Data de Alteração')
-                ->setAttrib('disabled', $this->exibir);
+        $dataResposta = new Zend_Form_Element_Text('dataResposta');
+        $dataResposta->setLabel('Data da Resposta')
+                ->setAttrib('disabled', $this->exibir);       
         
         $cliente = new Zend_Form_Element_Text('nomeCliente');
         $cliente->setLabel('Enviada por:')
@@ -100,8 +88,7 @@ class Application_Form_Responder extends Twitter_Form
         
         if ($this->tipo == 'SHOW'){
             $this->addElements(array(
-                $dt_inclusao,
-                $dt_alteracao,
+                $dataResposta,
                 $usuario,
                 $cliente
             ));

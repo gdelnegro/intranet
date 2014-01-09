@@ -54,14 +54,14 @@ class Application_Model_DbTable_Respostas extends Zend_Db_Table_Abstract
     }
     
     
-    public function listaMensagens($id = null,$todas = NULL){
+    public function listaRespostas($id = null,$todas = NULL){
         $db = Zend_Db_Table::getDefaultAdapter();
         
         $select = $db->select()
-             ->from('exibeMensagens');
+             ->from('respostas');
         
         if( !is_null($id) ){
-            $select->where('idContato = ?', $id);
+            $select->where('idResposta = ?', $id);
             $results = $select->query()->fetchAll();
         
             return $results[0];

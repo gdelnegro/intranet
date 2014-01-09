@@ -18,10 +18,23 @@ class ResponderController extends Zend_Controller_Action
     {
         // action body
         $bdRespostas = new Application_Model_DbTable_Respostas();
-        $contagem = $bdRespostas->contRespostas();
+        $dadosResposta = $bdRespostas->pesquisarResposta();
         
-        $this->view->contagem = $contagem;
+        $this->view->dadosResposta = $dadosResposta;
     }
+    
+    public function showAction(){
+        
+        $formResposta = new Application_Form_Responder('show');
+        $bdResposta = new Application_Model_DbTable_Respostas();
+        
+        $dadosRespostas = $bdResposta->listaRespostas( $this->_getParam('id') );
+        
+        $formResposta->populate($dadosRespostas);
+        
+        $this->view->formResposta = $formResposta;
+    }
+    
     
     public function mensagemAction()
     {
