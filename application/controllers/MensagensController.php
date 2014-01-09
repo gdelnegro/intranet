@@ -6,12 +6,10 @@ class MensagensController extends Zend_Controller_Action
     public function init()
     {
         $usuario = Zend_Auth::getInstance()->getIdentity();
-        //$this->view->usuario = $usuario;
         Zend_Layout::getMvcInstance()->assign('usuario', $usuario);
 
         if ( !Zend_Auth::getInstance()->hasIdentity() ) {
                 return $this->_helper->redirector->goToRoute( array('controller' => 'index'), null, true);
-            //$this->_redirect('/');
         }
     }
 
@@ -70,19 +68,6 @@ class MensagensController extends Zend_Controller_Action
        
        $dbMensagens->alterarMensagem($this->_getAllParams(), $usuario->idUsr);
        $this->_redirect('mensagens/index');
-   }
-   
-   public function responderAction()
-   {
-       $this->_helper->layout()->disableLayout();
-       
-       $usuario = Zend_Auth::getInstance()->getIdentity();
-       
-       $dbMensagens = new Application_Model_DbTable_Mensagens();
-       
-       $dadosMensagem = $dbMensagens->listaMensagens($this->_getParam('id'));
-       
-       $this->view->dados = $dadosMensagem;
    }
 
 }

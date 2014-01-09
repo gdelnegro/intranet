@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Mensagens extends Zend_Form
+class Application_Form_Mensagens extends Twitter_Form
 {
     
     protected $exibir;
@@ -24,11 +24,12 @@ class Application_Form_Mensagens extends Zend_Form
         /*Método do formulário (post ou get)*/
         $this->setMethod('post');
         /*Atributo HTML do form*/
-        $this->setAttrib("vertical", true);
+        $this->setAttrib("horizontal", true);
                 
         /*Elementos*/
         $idContato = new Zend_Form_Element_Hidden('idContato');
         $idCliente = new Zend_Form_Element_Hidden('idCliente');
+        $idUsr = new Zend_Form_Element_Hidden('idUsr');
 
         $mensagem = new Zend_Form_Element_Textarea('mensagem');
         $mensagem->setLabel('Mensagem')
@@ -102,6 +103,7 @@ class Application_Form_Mensagens extends Zend_Form
         $this->addElements(array(
             $idContato,
             $idCliente,
+            $idUsr,
             $mensagem,
             $status,
         ));
@@ -135,7 +137,7 @@ class Application_Form_Mensagens extends Zend_Form
 			"label" => "Responder",
                         #"onclick" => 'window.location =\''.$this->getView()->url(array('controller'=>'mensagens','action'=>'responder')).'\' '
                         #"onclick" => 'window.open (\''.$this->getView()->url(array('controller'=>'mensagens','action'=>'responder')).'\'"_blank","toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400 ") '
-                        "onclick" => 'window.open("'.$this->getView()->url(array('controller'=>'mensagens','action'=>'responder')).'","_blank","toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400 ")'                       
+                        "onclick" => 'window.open("'.$this->getView()->url(array('controller'=>'responder','action'=>'mensagem',)).'","_blank","toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=600, height=400 ")'                       
 		));
                 
         

@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Responder extends Zend_Form
+class Application_Form_Responder extends Twitter_Form
 {
     
     protected $exibir;
@@ -34,11 +34,12 @@ class Application_Form_Responder extends Zend_Form
         /*Método do formulário (post ou get)*/
         $this->setMethod('post');
         /*Atributo HTML do form*/
-        $this->setAttrib("vertical", true);
+        $this->setAttrib("horizontal", true);
                 
         /*Elementos*/
         $idContato = new Zend_Form_Element_Hidden('idContato');
         $idCliente = new Zend_Form_Element_Hidden('idCliente');
+        $idUsr = new Zend_Form_Element_Hidden('idUsr');
         
 
         $mensagem = new Zend_Form_Element_Textarea('mensagem');
@@ -86,14 +87,15 @@ class Application_Form_Responder extends Zend_Form
         'onclick', 
         'if (confirm("Deseja prosseguir?")) { document.form.submit(); } return false;'
         )
+                ->setLabel('Enviar')
                 ->setAttrib('class','btn-primary');
         
         
         $this->addElements(array(
             $idContato,
             $idCliente,
+            $idUsr,
             $mensagem,
-            $status,
         ));
         
         if ($this->tipo == 'SHOW'){
@@ -113,10 +115,10 @@ class Application_Form_Responder extends Zend_Form
         }
         
         /*Botão Voltar*/
-        $this->addElement("button", "voltar", array(
+        $this->addElement("button", "Fechar", array(
 			"class" => "btn-primary",
 			"label" => "Voltar",
-                        "onclick" => 'window.location =\''.$this->getView()->url(array('controller'=>'mensagens','action'=>'index')).'\' '
+                        "onclick" => 'window.close();'
                         
 		));
         
