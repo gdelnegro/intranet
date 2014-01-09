@@ -1,5 +1,4 @@
 <?= $this->escape($this->messages[0]) ?> 
-
 <?php
 function custom_echo($x)
 {
@@ -30,10 +29,10 @@ function custom_echo($x)
    </tr>
    <?php foreach($this->dadosMensagens AS $key => $mensagem):?>
    <tr>
-      <td><center><?=$mensagem['idContato']?></center></td>
+      <td><center><?=$mensagem['nomeCliente']?></center></td>
 <td><center><?=  custom_echo($mensagem['mensagem'])?></center></td>        
-        <td><center>Status</center></td>
-        <td><center>USR que alterou</center></td>
+        <td><center><?=$mensagem['Status']?></center></td>
+        <td><center><?=$mensagem['nomeUsuario']?></center></td>
         <td><center><?=$mensagem['dataContato']?></center></td>
         <td><center><?=$mensagem['dataUpdt']?></center></td>
       <td><center>

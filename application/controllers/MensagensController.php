@@ -12,9 +12,13 @@ class MensagensController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        
         $bdMensagens = new Application_Model_DbTable_Mensagens();
         
-        $dadosMensagens = $bdMensagens->pesquisarMensagens();
+        //$dadosMensagens = $bdMensagens->pesquisarMensagens();
+        
+        $dadosMensagens = $bdMensagens->listaMensagens();
+        
         
         $this->view->dadosMensagens = $dadosMensagens;
     }
