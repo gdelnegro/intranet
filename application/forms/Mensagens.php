@@ -24,7 +24,7 @@ class Application_Form_Mensagens extends Zend_Form
         /*Método do formulário (post ou get)*/
         $this->setMethod('post');
         /*Atributo HTML do form*/
-        $this->setAttrib("horizontal", true);
+        $this->setAttrib("vertical", true);
                 
         /*Elementos*/
         $idContato = new Zend_Form_Element_Hidden('idContato');
@@ -43,7 +43,15 @@ class Application_Form_Mensagens extends Zend_Form
                         )),
                     ))
                 ->setAttrib('rows','10')
-                ->setAttrib('disabled', $this->exibir);
+                ->setAttrib('disabled', $this->exibir)
+                ->setDecorators(array(
+                            'ViewHelper', 'Errors', 'Description',
+                            array(array('inner' => 'HtmlTag'),
+                                array('tag' => 'div', 'class' => 'span4')),
+                            'Label',
+                            array(array('outter' => 'HtmlTag'),
+                                array('tag' => 'div', 'class' => 'span4'))
+                        ));
         
         /*
          *Seleciona os valores do status de acordo com a tabela status 
@@ -87,7 +95,8 @@ class Application_Form_Mensagens extends Zend_Form
         $submit->setAttrib(
         'onclick', 
         'if (confirm("Deseja prosseguir?")) { document.form.submit(); } return false;'
-        );
+        )
+                ->setAttrib('class','btn-primary');
         
         
         $this->addElements(array(
@@ -117,6 +126,13 @@ class Application_Form_Mensagens extends Zend_Form
         $this->addElement("button", "voltar", array(
 			"class" => "btn-primary",
 			"label" => "Voltar",
+                        "onclick" => 'window.location =\''.$this->getView()->url(array('controller'=>'mensagens','action'=>'index')).'\' '
+                        
+		));
+        
+        $this->addElement("button", "responder", array(
+			"class" => "btn-primary",
+			"label" => "Responder",
                         "onclick" => 'window.location =\''.$this->getView()->url(array('controller'=>'mensagens','action'=>'index')).'\' '
                         
 		));

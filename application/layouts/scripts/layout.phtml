@@ -8,10 +8,6 @@
         <?= $this->headTitle() ?>
         <?= $this->headLink()->appendStylesheet(Zend_Controller_Front::getInstance()->getBaseUrl().'/media/css/bootstrap.css')?>
         <style>
-            /*.span2{
-box-shadow: 10px 10px 5px #888888;
-border-radius:15px;
-}*/
         </style>
     </head>
     
@@ -34,21 +30,21 @@ border-radius:15px;
 
 <div class="container-fluid">
   <div class="row-fluid">
-    <div class="span2">
-      <!--Menu-->
+    <div class="span3">
+      <!--Menu-->    
+      <!-- <ul class="nav nav-list bs-docs-sidenav"> -->
           <ul class="nav nav-tabs nav-stacked bs-docs-sidenav affix">
-            <li><a href="<?=$this->url(array("controller"=>"mensagens","action"=>"index"),null,true)?>">Mensagens</a></li>
-            
-            <?php if( $this->layout()->usuario->idGrupo == 1){?>
+          <li><a href="<?=$this->url(array("controller"=>"mensagens","action"=>"index"),null,true)?>">Mensagens</a></li>
+          <?php if( $this->layout()->usuario->idGrupo == 1){?>
             <li><a>Administração</a></li>
             <li><a href="<?=$this->url(array("controller"=>"group","action"=>"index"),null,true)?>"><i class="icon-chevron-right"></i> Administrar Usuários</a></li>
             <li><a href="<?=$this->url(array("controller"=>"group","action"=>"new"),null,true)?>"><i class="icon-chevron-right"></i> Administrar grupos de usuários</a></li>
             <?php };?>
+          <li><a href="#icons"><i class="icon-chevron-right"></i> Icons by Glyphicons</a></li>
         </ul>
-      
     </div>
-    <div class="span10">
+    <div class="span8">
       <?php echo $this->layout()->content; ?>
     </div>
-  </div>
+  </div><!-- div class=row -->
 </div>
