@@ -42,7 +42,7 @@ class IndexController extends Zend_Controller_Action
                 if( $result->isValid() ) {
                     $user = $authAdapter->getResultRowObject();
                     $auth->getStorage()->write($user);
-                    $this->_redirect('index/home');
+                    $this->_redirect('mensagens/index');
                 }
                 else{
                     $this->_helper->flashMessenger->addMessage(array('alert alert-error'=>'Dados Invalidos'));
