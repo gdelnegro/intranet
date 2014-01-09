@@ -133,8 +133,9 @@ class Application_Form_Mensagens extends Zend_Form
         $this->addElement("button", "responder", array(
 			"class" => "btn-primary",
 			"label" => "Responder",
-                        "onclick" => 'window.location =\''.$this->getView()->url(array('controller'=>'mensagens','action'=>'index')).'\' '
-                        
+                        #"onclick" => 'window.location =\''.$this->getView()->url(array('controller'=>'mensagens','action'=>'responder')).'\' '
+                        #"onclick" => 'window.open (\''.$this->getView()->url(array('controller'=>'mensagens','action'=>'responder')).'\'"_blank","toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400 ") '
+                        "onclick" => 'window.open("'.$this->getView()->url(array('controller'=>'mensagens','action'=>'responder')).'","_blank","toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400 ")'                       
 		));
                 
         

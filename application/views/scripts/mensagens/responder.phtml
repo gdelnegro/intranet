@@ -1,0 +1,58 @@
+<?=$this->doctype('HTML5')?>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <base href="http://<?=$_SERVER['HTTP_HOST'] . $this->baseUrl()?>/" />
+        <title>BestWebFast</title>
+        <?= $this->headTitle() ?>
+        <?= $this->headLink()->appendStylesheet(Zend_Controller_Front::getInstance()->getBaseUrl().'/media/css/bootstrap.css')?>
+        <style>
+            root { 
+                display: block;
+            }
+            html, body {
+                background-color: #fff
+            }
+            body {
+                padding-top: 40px; 
+            }
+            #horizon {
+                background-color: #0ff;
+                text-align: center;
+                position: absolute;
+                top: 50%;
+                left: 0px;
+                width: 100%;
+                height: 1px;
+                overflow: visible;
+                visibility: hidden;
+                display: block
+            }
+ 
+            #content {
+                position: absolute;
+                left: 50%;
+                width: 35%; /* Overall width of div */
+                top: -150px;
+                /*height: 70px;*/ /* Overall height of div */
+                /*top: -35px;*/ /* half of the overall height */
+                margin-left: -17%; /* half of the overall width */
+                visibility: visible;
+                background-color: #fff;
+                -webkit-border-radius: 10px 10px 10px 10px;
+                    -moz-border-radius: 10px 10px 10px 10px;
+                        border-radius: 10px 10px 10px 10px;
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                        box-shadow: 0 1px 2px rgba(0,0,0,.15);
+            }
+        </style>
+    </head>
+<body>
+    
+                    <?php
+                        var_dump($this->dados);
+                    ?>
+
+        
+</body>
