@@ -19,10 +19,9 @@ class MensagensController extends Zend_Controller_Action
         $bdMensagens = new Application_Model_DbTable_Mensagens();
         $dadosMensagens = $bdMensagens->listaMensagens(null, null);
         
-        $this->view->dadosMensagens = $dadosMensagens;
+        #$this->view->dadosMensagens = $dadosMensagens;
         
-        /*
-         * Utilizando paginação
+        
         
         $campo=$this->_getParam('campo');
         $operador=$this->_getParam('operador');
@@ -40,15 +39,13 @@ class MensagensController extends Zend_Controller_Action
             $where='date_="'.$date.'"';
         }
         
-        $model = new Application_Model_Sms();
-        $dados = $model->select("outgoing",$where);
-
-        $paginator = Zend_Paginator::factory($dados);
+       
+        $paginator = Zend_Paginator::factory($dadosMensagens);
         $paginator->setItemCountPerPage(50);
         $paginator->setPageRange(10);
         $paginator->setCurrentPageNumber($this->_request->getParam('pagina'));
         $this->view->paginator = $paginator;
-        */
+        
         
     }
     
