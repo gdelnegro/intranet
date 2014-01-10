@@ -21,8 +21,8 @@ class MensagensController extends Zend_Controller_Action
         
         $this->view->dadosMensagens = $dadosMensagens;
         
-        
-        
+        /*
+         * Utilizando paginação
         
         $campo=$this->_getParam('campo');
         $operador=$this->_getParam('operador');
@@ -48,7 +48,7 @@ class MensagensController extends Zend_Controller_Action
         $paginator->setPageRange(10);
         $paginator->setCurrentPageNumber($this->_request->getParam('pagina'));
         $this->view->paginator = $paginator;
-        
+        */
         
     }
     
