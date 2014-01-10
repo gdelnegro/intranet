@@ -20,6 +20,36 @@ class MensagensController extends Zend_Controller_Action
         $dadosMensagens = $bdMensagens->listaMensagens(null, null);
         
         $this->view->dadosMensagens = $dadosMensagens;
+        
+        
+        
+        
+        $campo=$this->_getParam('campo');
+        $operador=$this->_getParam('operador');
+        $valor=$this->_getParam('valor');
+        
+        $date = Zend_Date::now()->toString('yyyy-MM-dd');
+
+        if(($campo!=NULL AND $campo!='campo') OR ($operador!=NULL AND $operador!="operador") OR ($valor!=NULL AND $valor!='')){
+            #if($operador=='LIKE'){
+            #    $where=$campo.' '.$operador.' \'%'.$valor.'%\'';
+            #}else{
+                $where=$campo.' '.$operador.' \''.$valor.'\'';
+            #}
+        }else{
+            $where='date_="'.$date.'"';
+        }
+        
+        $model = new Application_Model_Sms();
+        $dados = $model->select("outgoing",$where);
+
+        $paginator = Zend_Paginator::factory($dados);
+        $paginator->setItemCountPerPage(50);
+        $paginator->setPageRange(10);
+        $paginator->setCurrentPageNumber($this->_request->getParam('pagina'));
+        $this->view->paginator = $paginator;
+        
+        
     }
     
     public function newAction()

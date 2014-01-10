@@ -1,0 +1,99 @@
+<style>
+div.pagination{
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    text-align: center;
+}
+
+div.pagination .currentPage {
+    padding:4px;
+    background-color: #069;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    margin-left: 3px;
+    margin-right: 3px
+}
+
+div.pagination .numberPage {
+    padding: 3px;
+    border: 1px solid #069;
+    color: #069;
+    border-radius: 4px;
+    text-align: center;
+    margin-left: 3px;
+    margin-right: 3px
+}
+div.pagination .numberPage:hover {
+    text-align: center;
+}
+</style>
+
+<?php 
+ if ($this->pageCount):
+/**
+* Obtem todas as instâncias passadas na URI com todos os parâmetros e valores
+* Nos mesclamos o array passado pelo paginator com os passados pela URI, usamos então o array_merge
+* $this->url(array_merge($params,array('pagina'=>$this->first)));
+**/
+$params=Zend_Controller_Front::getInstance()->getRequest()->getParams();
+?>
+
+<div class="pagination">
+<!-- Link para a primeira pagina -->
+<?php if (isset($this->previous)): ?>
+<a title="Primeira Pagina " class="numberPage"
+href="<?php echo $this->url(array_merge($params,array('pagina'=>
+$this->first))); ?>"> &nbsp; Primeira &nbsp; </a>
+<?php else: ?>
+<a class="currentPage" title="Primeira Pagina "     
+href="<?php echo $this->url(array_merge($params,array('pagina'=>
+$this->first)));  ?>" >&nbsp; Primeira &nbsp; </a>
+<?php endif; ?>
+ 
+<!-- Link para a pagina anterior -->
+<?php if (isset($this->previous)): ?>
+<a title="Pagina Anterior " class="numberPage"
+href="<?php echo $this->url(array_merge($params,array('pagina'=>
+$this->previous))); ?>"> &nbsp; Anterior &nbsp; </a>
+<?php else: ?>
+<a class="currentPage" title="Pagina Anterior "
+href="<?php echo $this->url(array_merge($params,array('pagina'=>
+$this->previous)));  ?>"> &nbsp; Anterior &nbsp; </a>
+<?php endif; ?>
+<!-- Links numerados -->
+<?php foreach ($this->pagesInRange as $page):
+if ($page != $this->current):  ?>
+<a title="<?php echo $page; ?>" class="numberPage"
+href="<?php echo $this->url(array_merge($params,array('pagina'=>
+$page))); ?>"> &nbsp;
+<?php echo $page; ?> &nbsp; </a>
+<?php else: ?><a class="currentPage" title="<?php echo $page; ?>"
+href="<?php echo $this->url(array_merge($params,array('pagina'=>
+$page)));  ?>">&nbsp;<?php echo $page; ?> &nbsp; </a>
+<?php endif; ?>
+<?php endforeach; ?>
+<!-- Link para a Proxima pagina -->
+<?php if (isset($this->next)): ?>
+<a title="Proxima Pagina" class="numberPage"
+href="<?php echo $this->url(array_merge($params,array('pagina'=>
+$this->next)));  ?>"> &nbsp; Próxima &nbsp; </a>
+<?php else: ?>
+<a class="currentPage" title="Proxima Pagina"
+href="<?php echo $this->url(array_merge($params,array('pagina'=>
+$this->next)));  ?>"> &nbsp; Próxima &nbsp; </a>
+<?php endif; ?>
+ <!-- Ultima pagina -->
+<?php if (isset($this->next)): ?>
+<a title="Ultima Pagina" class="numberPage"
+href="<?php echo $this->url(array_merge($params,array('pagina'=>
+$this->last))); ?>"> &nbsp; Última &nbsp; </a>
+<?php else: ?>
+<a class="currentPage" title="Ultima Pagina"
+href="<?php echo $this->url(array_merge($params,array('pagina'=>
+$this->last)));    ?>"> &nbsp; Última &nbsp; </a>
+<?php endif; ?>
+<?php echo " - Página(s) ".$this->current; ?> de
+<?php echo $this->pageCount." - Total Registros: ";
+ echo $this->totalItemCount; ?></div>
+<?php endif; ?>
