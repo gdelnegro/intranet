@@ -45,6 +45,21 @@ class Application_Form_Mensagens extends Twitter_Form
                     ))
                 ->setAttrib('rows','10')
                 ->setAttrib('disabled', $this->exibir);
+
+        $obs = new Zend_Form_Element_Textarea('obs');
+        $obs->setLabel('Comentário')
+                ->setAttrib('rows', 10)
+                ->setRequired(true)
+                ->setFilters(array('StringTrim'))
+                ->setValidators(array(
+                    array('notEmpty', true, array(
+                                'messages' => array(
+                                    'isEmpty' => 'Não pode ser nulo'
+                                )
+                        )),
+                    ))
+                ->setAttrib('rows','10')
+                ->setAttrib('disabled', $this->exibir);
         
         /*
          *Seleciona os valores do status de acordo com a tabela status 
@@ -98,6 +113,7 @@ class Application_Form_Mensagens extends Twitter_Form
             $idUsr,
             $mensagem,
             $status,
+            $obs,
         ));
         
         if ($this->tipo == 'SHOW'){

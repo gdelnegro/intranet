@@ -51,8 +51,26 @@ class ResponderController extends Zend_Controller_Action
     }
     
     public function responderAction() {
-        $resposta = new Application_Model_DbTable_Respostas();
-        $resposta->incluirResposta($this->getAllParams());
+        
+        $this->_helper->layout()->disableLayout();
+        
+        $dbResposta = new Application_Model_DbTable_Respostas();
+        $dbCliente = new Application_Model_DbTable_Clientes();
+        $dadosCliente = $dbCliente->pesquisarCliente($this->_getParam('idCliente'));
+        $dadosResposta = array_merge($this->getAllParams(), $dadosCliente);
+                
+        if( $dbResposta->incluirResposta($this->getAllParams()) == TRUE ){
+            $resposta = new Application_Model_Respostas();
+            
+            $resultado = $resposta->enviarEmail($dadosResposta);
+            
+            if ( $resultado == TRUE ){
+                $this->view->mensagem = 'E-mail enviado com sucesso';
+            }else {
+                $this->view->mensagem = $resultado;
+            }
+            
+        }
     }
 
 

@@ -42,8 +42,15 @@ class Application_Model_DbTable_Respostas extends Zend_Db_Table_Abstract
             if( substr($msgErro, 0, 15) == 'SQLSTATE[23000]' ){
                 die('Esta mensagem ja foi respondida');
             }
-            //return $exc->getTraceAsString();
         }
+        
+        $dbContato = new Application_Model_DbTable_Mensagens();
+        $where = $this->getAdapter()->quoteInto("idContato = ?", $request['idContato']);
+        $dbContato->update(array(
+            'status' => 2,
+            'idUsr' =>$request['idUsr'],
+            'dataResposta' => $date
+            ), $where);
         
         return true;
     }
