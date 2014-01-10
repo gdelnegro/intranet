@@ -61,6 +61,7 @@ $this->previous))); ?>"> &nbsp; Anterior &nbsp; </a>
 href="<?php echo $this->url(array_merge($params,array('pagina'=>
 $this->previous)));  ?>"> &nbsp; Anterior &nbsp; </a>
 <?php endif; ?>
+
 <!-- Links numerados -->
 <?php foreach ($this->pagesInRange as $page):
 if ($page != $this->current):  ?>
@@ -73,6 +74,7 @@ href="<?php echo $this->url(array_merge($params,array('pagina'=>
 $page)));  ?>">&nbsp;<?php echo $page; ?> &nbsp; </a>
 <?php endif; ?>
 <?php endforeach; ?>
+
 <!-- Link para a Proxima pagina -->
 <?php if (isset($this->next)): ?>
 <a title="Proxima Pagina" class="numberPage"
@@ -83,6 +85,7 @@ $this->next)));  ?>"> &nbsp; Próxima &nbsp; </a>
 href="<?php echo $this->url(array_merge($params,array('pagina'=>
 $this->next)));  ?>"> &nbsp; Próxima &nbsp; </a>
 <?php endif; ?>
+
  <!-- Ultima pagina -->
 <?php if (isset($this->next)): ?>
 <a title="Ultima Pagina" class="numberPage"
