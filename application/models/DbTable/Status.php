@@ -50,9 +50,14 @@ class Application_Model_DbTable_Status extends Zend_Db_Table_Abstract
         $this->update($dados, $where);
     }
     
-    public function getListaStatus(){
-        $select = $this->_db->select()
-                ->from($this->_name, array('key'=>'idStatus','value'=>'descricao'));
+    public function getListaStatus($form=null){
+        $select = $this->_db->select();
+                if(is_null($form)){
+                    $select->from($this->_name, array('key'=>'idStatus','value'=>'descricao'));
+                }else{
+                    $select->from($this->_name, array('key'=>'descricao','value'=>'descricao'));
+                }
+                
         $result = $this->getAdapter()->fetchAll($select);
         
         return $result;

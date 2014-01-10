@@ -17,34 +17,22 @@ class MensagensController extends Zend_Controller_Action
     {
         
         $bdMensagens = new Application_Model_DbTable_Mensagens();
-        $dadosMensagens = $bdMensagens->listaMensagens(null, null);
         
-        #$this->view->dadosMensagens = $dadosMensagens;
+        $formSelectStatus = new Application_Form_SelectStatus();
         
-        
-        
-        $campo=$this->_getParam('campo');
-        $operador=$this->_getParam('operador');
-        $valor=$this->_getParam('valor');
-        
+        $status=$this->_getParam('status');
+                
         $date = Zend_Date::now()->toString('yyyy-MM-dd');
-
-        if(($campo!=NULL AND $campo!='campo') OR ($operador!=NULL AND $operador!="operador") OR ($valor!=NULL AND $valor!='')){
-            #if($operador=='LIKE'){
-            #    $where=$campo.' '.$operador.' \'%'.$valor.'%\'';
-            #}else{
-                $where=$campo.' '.$operador.' \''.$valor.'\'';
-            #}
-        }else{
-            $where='date_="'.$date.'"';
-        }
         
-       
+        $dadosMensagens = $bdMensagens->listaMensagens(null, $status);
+
         $paginator = Zend_Paginator::factory($dadosMensagens);
         $paginator->setItemCountPerPage(50);
         $paginator->setPageRange(10);
         $paginator->setCurrentPageNumber($this->_request->getParam('pagina'));
         $this->view->paginator = $paginator;
+        $this->view->formSelectStatus = $formSelectStatus;
+        $this->view->status = $status;
         
         
     }

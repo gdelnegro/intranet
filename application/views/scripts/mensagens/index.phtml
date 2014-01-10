@@ -11,34 +11,15 @@ function custom_echo($x)
     $y=substr($x,0,50) . '...';
     echo $y;
   }
-}?>
-<center><form class="form-inline" action="<?=$this->url(array("controller"=>"mensagens","action"=>"index"),null,true)?>" method="post">
-    <select name="campo">
-        <option value="campo">Campo</option>
-        <option value="date_">Data</option>
-        <option value="number">Numero</option>
-        <option value="msg">Texto</option>
-        <option value="result">Resultado</option>
-    </select>
-    <select name="operador">
-        <option value="operador">Operador</option>
-        <option value="=">Igual a</option>
-        <option value="<">Menor que</option>
-        <option value="<=">Menor ou igual a</option>
-        <option value=">">Maior que</option>
-        <option value=">=">Maior ou igual a</option>
-        <option value="LIKE">Parecido com</option>
-    </select>
-  <input type="text" name="valor" class="input-small" placeholder="Texto" autocomplete="off">
-  <button type="submit" class="btn">Enviar</button>
-  <a class="btn" href="<?=$this->url(array("controller"=>"mensagens","action"=>"index"),null,true)?>">Limpar Filtros</a>
-</form>
-</center>
+}
 
-<form class="form-search">
-  <input type="text" class="input-medium search-query" value='A ser implementado'>
-  <button type="submit" class="btn">Pesquisar</button>
-</form>
+?>
+<center>
+ <?php
+ $this->formSelectStatus->setAction( $this->url( array("controller"=>"mensagens","action"=>"index"),null,true ) );
+ echo $this->formSelectStatus;
+ ?>   
+</center>
 
 <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
 

@@ -58,7 +58,7 @@ class Application_Model_DbTable_Mensagens extends Zend_Db_Table_Abstract
     }
     
     
-    public function listaMensagens($id = null,$todas = NULL){
+    public function listaMensagens($id = null,$status = NULL){
         $db = Zend_Db_Table::getDefaultAdapter();
         
         $select = $db->select()
@@ -70,8 +70,10 @@ class Application_Model_DbTable_Mensagens extends Zend_Db_Table_Abstract
         
             return $results[0];
         }
-        if( is_null($todas)){
+        if( is_null($status)){
             $select->where('status != ?', 'Fechado');
+        }elseif( !is_null($status) ){
+            $select->where('status = ?', $status);
         }
         $select->order('dataContato DESC');
              
