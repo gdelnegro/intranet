@@ -34,11 +34,12 @@
       <!--Menu-->    
       <!-- <ul class="nav nav-list bs-docs-sidenav"> -->
           <ul class="nav nav-tabs nav-stacked bs-docs-sidenav affix">
-          <li><a href="<?=$this->url(array("controller"=>"mensagens","action"=>"index"),null,true)?>">Mensagens</a></li>
+          <li><a href="<?=$this->url(array("controller"=>"mensagens","action"=>"index"),null,true)?>">Mensagens</a></li>          
           <?php if( $this->layout()->usuario->idGrupo == 1){?>
             <li><a>Administração</a></li>
             <li><a href="<?=$this->url(array("controller"=>"group","action"=>"index"),null,true)?>"><i class="icon-chevron-right"></i> Administrar Usuários</a></li>
             <li><a href="<?=$this->url(array("controller"=>"group","action"=>"new"),null,true)?>"><i class="icon-chevron-right"></i> Administrar grupos de usuários</a></li>
+            <li><a href="<?=$this->url(array("controller"=>"responder","action"=>"index"),null,true)?>"><i class="icon-chevron-right"></i>Ver Respostas</a></li>
             <?php };?>
           <li><a href="#icons"><i class="icon-chevron-right"></i> Icons by Glyphicons</a></li>
         </ul>

@@ -20,20 +20,32 @@ class Application_Model_DbTable_Respostas extends Zend_Db_Table_Abstract
         }
     }
     
-    public function incluirResposta(array $request, $usr){
-        $date = Zend_Date::now()->toString('yyyy-MM-dd');
+    public function incluirResposta(array $request){
+        $date = Zend_Date::now()->toString('yyyy-MM-dd HH:ii:ss');
         $dados = array(
             /*
              * formato:
              * 'nome_campo => valor,
              */
-            'dataResposta'     =>   $request['dataResposta'],
+            'dataResposta'     =>   $date,
             'mensagem'          =>  $request['resposta'],
             'idCliente'         =>  $request['idCliente'],
             'idContato'         =>  $request['idContato'],
             'idUsr'            =>  $request['idUsr']
         );
-        return $this->insert($dados);
+        
+        try {
+            $this->insert($dados);
+            
+        } catch (Exception $exc) {
+            $msgErro = $exc->getMessage();
+            if( substr($msgErro, 0, 15) == 'SQLSTATE[23000]' ){
+                die('Esta mensagem ja foi respondida');
+            }
+            //return $exc->getTraceAsString();
+        }
+        
+        return true;
     }
     
     public function alterarResposta(array $request, $usr){
