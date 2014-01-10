@@ -40,6 +40,7 @@ class ResponderController extends Zend_Controller_Action
     {
         $this->_helper->layout()->disableLayout();
         $usuario = Zend_Auth::getInstance()->getIdentity();
+        
         $dbMensagens = new Application_Model_DbTable_Mensagens();
         $dadosMensagem = $dbMensagens->listaMensagens($this->_getParam('id'));
         
@@ -51,15 +52,27 @@ class ResponderController extends Zend_Controller_Action
     }
     
     public function responderAction() {
-        
+        /*
+         * Disabilita o Layout da página
+         */
         $this->_helper->layout()->disableLayout();
+        
+        /*
+         * Pega as informações do usuário logado
+         */
+        $this->_helper->layout()->disableLayout();
+        $usuario = Zend_Auth::getInstance()->getIdentity();
+        
         
         $dbResposta = new Application_Model_DbTable_Respostas();
         $dbCliente = new Application_Model_DbTable_Clientes();
+        
         $dadosCliente = $dbCliente->pesquisarCliente($this->_getParam('idCliente'));
+        
         $dadosResposta = array_merge($this->getAllParams(), $dadosCliente);
-                
-        if( $dbResposta->incluirResposta($this->getAllParams()) == TRUE ){
+        
+        
+        if( $dbResposta->incluirResposta($this->getAllParams(),$usuario->idUsr) == TRUE ){
             $resposta = new Application_Model_Respostas();
             
             $resultado = $resposta->enviarEmail($dadosResposta);
@@ -71,6 +84,7 @@ class ResponderController extends Zend_Controller_Action
             }
             
         }
+
     }
 
 

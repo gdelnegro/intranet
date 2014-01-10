@@ -20,7 +20,7 @@ class Application_Model_DbTable_Respostas extends Zend_Db_Table_Abstract
         }
     }
     
-    public function incluirResposta(array $request){
+    public function incluirResposta(array $request, $usr){
         $date = Zend_Date::now()->toString('yyyy-MM-dd HH:ii:ss');
         $dados = array(
             /*
@@ -31,7 +31,7 @@ class Application_Model_DbTable_Respostas extends Zend_Db_Table_Abstract
             'mensagem'          =>  $request['resposta'],
             'idCliente'         =>  $request['idCliente'],
             'idContato'         =>  $request['idContato'],
-            'idUsr'            =>  $request['idUsr']
+            'idUsr'            =>  $usr
         );
         
         try {
